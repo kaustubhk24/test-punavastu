@@ -376,7 +376,16 @@ document.getElementById("dob").value = today;
         return obj;
     }, {});
 
+    if (urlParams.s!=undefined)
+    {
     document.getElementById("service").value=decodeURIComponent(urlParams.s);
+    }
+    if (urlParams.partner!=undefined)
+    {
+        document.getElementById("partner").value=decodeURIComponent(urlParams.partner);
+
+    }
+
 </script>
 
 
