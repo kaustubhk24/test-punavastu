@@ -146,8 +146,8 @@
             <div class="row justify-content-around">
                 <div class="col-md-6">
                     <div class="contact-us-form gray-light-bg rounded p-5">
-                        <h4>Give us few details </h4>
-                        <form  id="partner-form" name="partner-form" class="contact-us-form">
+                        <h4 id="give-details">Give us few details </h4>
+                        <form  id="form-enter-data" name="partner-form" class="contact-us-form">
                             <div class="form-row">
                                 <div class="col-12">
                                     <div style="color: red;display: none;" id="form-error" class="form-group">
@@ -156,26 +156,44 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Full Name</label>
+                                        <label>Enter the Service Name *</label>
+                                        <input type="text" class="form-control" name="service_name"  id="service" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Full Name*</label>
                                         <input type="text" class="form-control" name="name"  required="required">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Mobile Number</label>
+                                        <label>Mobile Number*</label>
                                         <input type="number" class="form-control" name="mobile" required="required">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Email</label>
+                                        <label>Email*</label>
                                         <input type="email" class="form-control" name="email" required="required">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Date of Birth</label>
-                                        <input style=" height: 40px; width: 100%;" type="date" id="dob" name="dob" title ="Date">
+                                        <label>Date of Birth*</label>
+                                        <input style=" height: 40px; width: 100%;" required="required" type="date" id="dob" name="dob" title ="Date">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Address*</label>
+                                        <textarea name="address" id="address" class="form-control" required="required" rows="7" cols="25" placeholder="Address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Reference Number (NOT required)</label>
+                                        <input type="text" class="form-control" id="partner" name="partner" >
                                     </div>
                                 </div>
                                 <div class="col-sm-12 mt-3">
@@ -350,6 +368,16 @@ document.getElementById("dob").value = today;
 <!--jQuery-->
 
 <script src="js/jquery-3.4.1.min.js"></script>
+<script>
+    var urlParams = location.search.split(/[?&]/).slice(1).map(function(paramPair) {
+        return paramPair.split(/=(.+)?/).slice(0, 2);
+    }).reduce(function (obj, pairArray) {            
+        obj[pairArray[0]] = pairArray[1];
+        return obj;
+    }, {});
+
+    document.getElementById("service").value=decodeURIComponent(urlParams.s);
+</script>
 
 
 <script>
@@ -358,6 +386,8 @@ document.getElementById("dob").value = today;
   
     form.addEventListener('submit', e => {
       e.preventDefault()
+      document.getElementById("form-enter-data").style="display:none";
+      document.getElementById("give-details").innerText="Please wait...we're submitting your details"
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => 
         
