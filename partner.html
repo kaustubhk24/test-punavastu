@@ -146,7 +146,7 @@
             <div class="row justify-content-around">
                 <div class="col-md-6">
                     <div class="contact-us-form gray-light-bg rounded p-5">
-                        <h4>Give us few details </h4>
+                        <h4 id="form-header">Give us few details </h4>
                         <form  id="partner-form" name="partner-form" class="contact-us-form">
                             <div class="form-row">
                                 <div class="col-12">
@@ -347,6 +347,9 @@
   
     form.addEventListener('submit', e => {
       e.preventDefault()
+      document.getElementById("partner-form").style="display:none";
+      document.getElementById("form-header").innerText="Please wait...your details are being submitted"
+    
       fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => 
         
