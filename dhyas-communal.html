@@ -301,6 +301,7 @@
         </div>
     </section>
     <!--about us section end-->
+    
   <!--call to action section start-->
   <section class="call-to-action py-5">
     <div class="container">
@@ -320,7 +321,68 @@
 </section>
 <!--call to action section end-->
 
-    
+     <!--Enter Your Details section start-->
+     <section class="contact-us-section ptb-100">
+        <div class="container contact">
+            <div class="col-12 pb-3 message-box d-none">
+                <div class="alert alert-danger"></div>
+            </div>
+            <div class="row justify-content-around">
+                <div class="col-md-6">
+                    <div class="contact-us-form gray-light-bg rounded p-5">
+                        <h4 id="give-details">बचत गट नोंदणी </h4>
+                        <form  id="gat-form" name="gat-form" class="gat-form">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div style="color: red;display: none;" id="form-error" class="form-group">
+                                        We were NOT able to save your data. kindly enter data again.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>बचत गटाचे नाव  *</label>
+                                        <input type="text" class="form-control" name="gat_name"  id="gat_name" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>बचतगटाच्या अध्यक्षांचे नाव  *</label>
+                                        <input type="text" class="form-control" name="adhyaksha_name"  required="required">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>फोन नंबर *</label>
+                                        <input type="number" class="form-control" name="mobile" required="required">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>ई-मेल  *</label>
+                                        <input type="email" class="form-control" name="email" required="required">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>पत्ता*</label>
+                                        <textarea name="address" id="address" class="form-control" required="required" rows="7" cols="25" placeholder="Address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-3">
+                                    <button type="submit" class="btn secondary-solid-btn" id="submit-form-now">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </section>
+    <!--Enter Your Details section end-->
 
 
 </div>
@@ -462,6 +524,34 @@
     <span class="ti-angle-up"></span>
 </button>
 <!--bottom to top button end-->
+
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyiaT6UtiI1LltIwy-Xhc5DlNKF_mNTi141pQE3bAAX2I09H0Og/exec'
+    const form = document.forms['gat-form']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      document.getElementById("gat-form").style="display:none";
+      document.getElementById("give-details").innerText="Please wait...your details are being submitted"
+    
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => 
+        
+        window.location.replace("thank-you.html?msg=Thank you for sharing your details. One of our executive will contact you shortly")
+        )
+        .catch(error => 
+
+        document.getElementById("form-error").style="display:none;"
+        
+        )
+    })
+  </script>
+
+
+
+
+
 
 <!--jQuery-->
 <script src="js/jquery-3.4.1.min.js"></script>
